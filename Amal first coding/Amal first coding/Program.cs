@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 
 IWebDriver driver = new ChromeDriver();
 // navigate to the turnup portal
@@ -26,7 +27,7 @@ else
     Console.WriteLine("logged in Failed, Test failed");
 
 }
-// create time record
+#region create time record
 
 //navigate to time and material page
 IWebElement administrationDropdown = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a"));
@@ -77,8 +78,47 @@ else
 {
     Console.WriteLine("New record hasn't created");
 }
-// Edit a time record
+#endregion create time record
+#region Edit a time record
 IWebElement editButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
 editButton.Click();
 IWebElement codeTextboxEdit = driver.FindElement(By.Id("Code"));
-codeTextboxEdit.SendKeys(" Change");
+codeTextboxEdit.Clear();
+codeTextboxEdit.SendKeys("Change");
+
+//click on save
+driver.FindElement(By.Id("SaveButton")).Click();
+Thread.Sleep(2000);
+driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span")).Click();
+IWebElement newlist2 = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+if (newlist2.Text == "Change")
+{
+    Console.WriteLine("New time record edited successfully");
+}
+else
+{
+    Console.WriteLine("New record is not edited successfully");
+}
+#endregion Edit a time record
+
+#region Delete a time record
+Thread.Sleep(2000);
+IWebElement deleteButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
+deleteButton.Click();
+Thread.Sleep(2000);
+IAlert alert = driver.SwitchTo().Alert();
+alert.Accept();
+Thread.Sleep(2000);
+driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span")).Click();
+IWebElement newlist3 = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+if (newlist3.Text == "Change")
+{
+    Console.WriteLine("Record is not deleted");
+}
+else
+{
+    Console.WriteLine("record deleted Successfully");
+}
+
+
+#endregion Delete a time record
