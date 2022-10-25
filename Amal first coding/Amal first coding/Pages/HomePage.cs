@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Amal_first_coding.Pages
 {
-   public class HomePage
-   {
+    public class HomePage
+    {
         public void GoToTMPage(IWebDriver driver)
         {
             //navigate to time and material page
@@ -19,6 +19,14 @@ namespace Amal_first_coding.Pages
             timeAndMaterial.Click();
 
         }
-
-   }
+        public void GoToEmployeePage(IWebDriver driver)
+        {
+            //navigate to employee page
+            IWebElement administrationDropdown = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a"));
+            administrationDropdown.Click();
+            Thread.Sleep(1000);
+            IWebElement employee = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[2]/a"));
+            employee.Click();
+        }
+    }
 }

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,18 +26,7 @@ namespace Amal_first_coding.Pages
             // identify login button and click on it
             IWebElement logginbutton = driver.FindElement(By.XPath("//*[@id=\"loginForm\"]/form/div[3]/input[1]"));
             logginbutton.Click();
-            // check if user logged in successfully
-            IWebElement hellohari = driver.FindElement(By.XPath("//*[@id=\"logoutForm\"]/ul/li/a"));
-            if (hellohari.Text == "Hello hari!")
-            {
-                Console.WriteLine("Logged in Successfully, Test passed");
-            }
-            else
-            {
-                Console.WriteLine("logged in Failed, Test failed");
-
-            }
+           
         }
-
     }
 }

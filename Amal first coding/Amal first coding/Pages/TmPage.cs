@@ -5,11 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Amal_first_coding.Utilities;
 
 namespace Amal_first_coding.Pages
 {
    public class TmPage
-    {
+   {
         public void CreateTM(IWebDriver driver) 
         {
             // click on create new button
@@ -59,6 +60,7 @@ namespace Amal_first_coding.Pages
         }
         public void EditTM(IWebDriver driver)
         {
+            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[1]", 2);            
             IWebElement editButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
             editButton.Click();
             IWebElement codeTextboxEdit = driver.FindElement(By.Id("Code"));
@@ -101,5 +103,5 @@ namespace Amal_first_coding.Pages
 
         }
 
-    }
+   }
 }
